@@ -1,19 +1,20 @@
 import { program } from "commander";
 import { parseISO, add, addDays, format, min } from "date-fns";
 import { execFileSync } from "child_process";
-import csvStringify from "csv-stringify/lib/sync";
+import { stringify } from "csv-stringify/sync";
 
 async function main(): Promise<void> {
   program.requiredOption("--start <date>").requiredOption("--end <date>").requiredOption("--query <query>");
 
   program.parse(process.argv);
 
-  const startDate = parseISO(program.start);
-  const endDate = parseISO(program.end);
-  const query = program.query as string;
+  const options = program.opts();
+  const startDate = parseISO(options.start);
+  const endDate = parseISO(options.end);
+  const query = options.query as string;
 
   const intervalDays = 7;
-  const allLogs = [];
+  // const allLogs = [];
   process.stdout.write(
     "title,author,url,createdAt,mergedAt,additions,deletions,authoredDate,leadTimeSeconds,timeToMergeSeconds\n"
   );
@@ -27,9 +28,11 @@ async function main(): Promise<void> {
       ["log", "--start", start.toISOString(), "--end", end.toISOString(), "--query", query],
       { encoding: "utf8" }
     );
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const logs: any[] = JSON.parse(stdout);
     process.stdout.write(
-      csvStringify(
+      stringify(
         logs.map((l) => [
           l.title,
           l.author,
