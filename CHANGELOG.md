@@ -1,3 +1,9 @@
+## [v0.4.0](https://github.com/choco14t/merged-pr-stat/pull/1) (2023-09-16)
+
+* Fork repository
+* Update dependencies
+* Replace GraphQL client to `@octokit/graphql`
+
 ## [v0.3.1](https://github.com/shibayu36/merged-pr-stat/compare/v0.3.0...v0.3.1) (2022-03-14)
 
 * Update author is nullable [#12](https://github.com/shibayu36/merged-pr-stat/pull/12) ([isanasan](https://github.com/isanasan))
