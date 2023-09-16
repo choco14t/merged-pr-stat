@@ -1,17 +1,18 @@
-import { GraphQLClient, gql } from "graphql-request";
+import { gql } from "graphql-request";
+import { graphql } from "@octokit/graphql";
 import { PullRequest } from "./entity";
 import { parseISO } from "date-fns";
 
 // GitHub.com https://api.github.com/graphql
 // GitHub Enterprise https://<HOST>/api/graphql
-const GITHUB_GRAPHQL_ENDPOINT = process.env.GITHUB_ENDPOINT || "https://api.github.com/graphql";
+const GITHUB_GRAPHQL_ENDPOINT = process.env.GITHUB_ENDPOINT || "https://api.github.com";
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
-export const graphQLClient = new GraphQLClient(GITHUB_GRAPHQL_ENDPOINT, {
+export const graphQLClient = graphql.defaults({
   headers: {
     authorization: `Bearer ${GITHUB_TOKEN}`,
   },
-  timeout: 3600_000,
+  baseUrl: GITHUB_GRAPHQL_ENDPOINT,
 });
 
 export async function fetchAllMergedPullRequests(
@@ -55,6 +56,7 @@ interface PullRequestNode {
 }
 
 async function fetchAllPullRequestsByQuery(searchQuery: string): Promise<PullRequest[]> {
+  console.log(`searchQuery: ${searchQuery}`)
   const query = gql`
     query($after: String) {
       search(type: ISSUE, first: 100, query: "${searchQuery}", after: $after) {
@@ -106,7 +108,8 @@ async function fetchAllPullRequestsByQuery(searchQuery: string): Promise<PullReq
   let prs: PullRequest[] = [];
   // eslint-disable-next-line no-constant-condition
   while (true) {
-    const data = await graphQLClient.request(query, { after });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data = await graphQLClient(query, { after }) as any;
     prs = prs.concat(
       data.search.nodes.map(
         (p: PullRequestNode) =>
@@ -125,8 +128,6 @@ async function fetchAllPullRequestsByQuery(searchQuery: string): Promise<PullReq
     );
 
     if (!data.search.pageInfo.hasNextPage) break;
-
-    // console.error(JSON.stringify(data, undefined, 2));
 
     after = data.search.pageInfo.endCursor;
   }

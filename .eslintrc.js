@@ -1,6 +1,6 @@
 module.exports = {
   plugins: [],
-  extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  extends: ["eslint:recommended", "prettier"],
   env: { node: true, es2020: true },
   overrides: [
     {
@@ -8,7 +8,7 @@ module.exports = {
       extends: [
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
-        "prettier/@typescript-eslint",
+        "prettier",
       ],
       parser: "@typescript-eslint/parser",
       parserOptions: {
