@@ -14,11 +14,12 @@
     "url": "https://github.com/shibayu36/merged-pr-stat/issues"
   },
   "dependencies": {
-    "commander": "^6.0.0",
-    "csv-stringify": "^5.5.1",
-    "date-fns": "^2.15.0",
-    "graphql": "^15.3.0",
-    "graphql-request": "^3.0.0",
+    "@octokit/graphql": "7.0.1",
+    "commander": "11.0.0",
+    "csv-stringify": "6.4.2",
+    "date-fns": "2.30.0",
+    "graphql": "16.8.0",
+    "graphql-request": "6.1.0",
     "mathjs": "11.11.0",
     "underscore": "1.13.6"
   },
