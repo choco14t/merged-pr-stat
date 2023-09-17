@@ -1,7 +1,7 @@
 {
   "name": "@choco14t/merged-pr-stat",
   "description": "A tool to create merged PullRequest statistics",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": {
     "name": "choco14t",
     "email": "chocoh14t@gmail.com",
