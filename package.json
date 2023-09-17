@@ -3,9 +3,9 @@
   "description": "A tool to create merged PullRequest statistics",
   "version": "0.4.1",
   "author": {
-    "name": "shibayu36",
-    "email": "shibayu36@gmail.com",
-    "url": "https://github.com/shibayu36"
+    "name": "choco14t",
+    "email": "chocoh14t@gmail.com",
+    "url": "https://github.com/choco14t"
   },
   "bin": {
     "merged-pr-stat": "bin/merged-pr-stat.js"
@@ -62,5 +62,8 @@
     "lint": "eslint . --ext 'ts,js'",
     "lint:fix": "eslint . --fix --ext 'ts,js'",
     "test": "jest"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/choco14t"
   }
 }
