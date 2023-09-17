@@ -1,5 +1,5 @@
 {
-  "name": "@shibayu36/merged-pr-stat",
+  "name": "@choco14t/merged-pr-stat",
   "description": "A tool to create merged PullRequest statistics",
   "version": "0.4.0",
   "author": {
@@ -54,7 +54,7 @@
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shibayu36/merged-pr-stat.git"
+    "url": "https://github.com/choco14t/merged-pr-stat.git"
   },
   "scripts": {
     "build": "webpack",
