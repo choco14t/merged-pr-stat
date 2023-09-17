@@ -56,7 +56,6 @@ interface PullRequestNode {
 }
 
 async function fetchAllPullRequestsByQuery(searchQuery: string): Promise<PullRequest[]> {
-  console.log(`searchQuery: ${searchQuery}`)
   const query = gql`
     query($after: String) {
       search(type: ISSUE, first: 100, query: "${searchQuery}", after: $after) {
